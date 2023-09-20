@@ -1,0 +1,149 @@
+' @startuml
+' left to right direction
+' actor "Visitor" as visitors
+' rectangle Register {
+'     usecase "Log in" as UC1
+'     usecase "Sign up" as UC2
+' }
+' visitors --> UC1
+' visitors --> UC2
+
+
+' @enduml
+
+' @startuml
+' left to right direction
+' actor pengunjung
+' actor administrator
+' actor pemilik_objek_wisata
+' actor sistem_pembayaran
+' rectangle aplikasi_desa {
+'     (mencari objek wisata) --- pengunjung
+'     (melihat detail objek wisata) --- pengunjung
+'     (reservasi) --- pengunjung
+'     (memberikan ulasan dan rating) --- pengunjung
+
+'     administrator --- (manajemen objek pariwisata)
+'     administrator --- (manajemen reservasi)
+'     administrator --- (manajemen ulasan dan rating)
+
+'     pengunjung --- (mengelola_akun) : <<include>>
+'     administrator --- (mengelola_akun) : <<include>>
+
+'     (manajemen objek pariwisata) --- pemilik_objek_wisata : <<extend>>
+'     (manajemen reservasi) --- sistem_pembayaran : <<include>>
+'     (manajemen reservasi) --- pemilik_objek_wisata : <<extend>>
+'     (manajemen ulasan dan rating) --- (melihat detail objek wisata) : <<extend>>
+' }
+
+' database database_desa {
+'     (data objek wisata)
+'     (data reservasi)
+'     (data ulasan dan rating)
+' }
+
+' pengunjung --|> database_desa : <<access>>
+' administrator --|> database_desa : <<access>>
+' pemilik_objek_wisata --|> database_desa : <<access>>
+' sistem_pembayaran --|> database_desa : <<access>>
+
+' @enduml
+
+' @startuml
+' left to right direction
+' actor pengunjung
+' actor administrator
+' actor pemilik_objek_wisata
+' actor sistem_pembayaran
+' rectangle aplikasi_desa {
+'     (mencari objek wisata) --- pengunjung
+'     (melihat detail objek wisata) --- pengunjung
+'     (reservasi) --- pengunjung
+'     (memberikan ulasan dan rating) --- pengunjung
+'     (registrasi) --- pengunjung
+'     (login) --- pengunjung
+
+'     administrator --- (manajemen objek pariwisata)
+'     administrator --- (manajemen reservasi)
+'     administrator --- (manajemen ulasan dan rating)
+
+'     pengunjung --- (mengelola_akun) : <<include>>
+'     administrator --- (mengelola_akun) : <<include>>
+
+'     (manajemen objek pariwisata) --- pemilik_objek_wisata : <<extend>>
+'     (manajemen reservasi) --- sistem_pembayaran : <<include>>
+'     (manajemen reservasi) --- pemilik_objek_wisata : <<extend>>
+'     (manajemen ulasan dan rating) --- (melihat detail objek wisata) : <<extend>>
+
+'     (registrasi) --- (login) : <<include>>
+
+'     (registrasi) --- (mengelola_akun) : <<extend>>
+
+' }
+
+' database database_desa {
+'     (data objek wisata)
+'     (data reservasi)
+'     (data ulasan dan rating)
+'     (data akun pengunjung)
+' }
+
+' pengunjung --|> database_desa : <<access>>
+' administrator --|> database_desa : <<access>>
+' pemilik_objek_wisata --|> database_desa : <<access>>
+' sistem_pembayaran --|> database_desa : <<access>>
+
+' @enduml
+
+@startuml
+left to right direction
+actor pengunjung
+actor administrator
+actor pemilik_objek_wisata
+actor sistem_pembayaran
+rectangle aplikasi_desa {
+    (mencari objek wisata) --- pengunjung
+    (melihat detail objek wisata) --- pengunjung
+    (reservasi) --- pengunjung
+    (memberikan ulasan dan rating) --- pengunjung
+    (registrasi) --- pengunjung
+    (login) --- pengunjung
+
+    (validasi_pengguna) --- sistem_pembayaran : <<include>>
+    (validasi_pengguna) --- (manajemen objek pariwisata) : <<include>>
+    (validasi_pengguna) --- (manajemen reservasi) : <<include>>
+    (validasi_pengguna) --- (manajemen ulasan dan rating) : <<include>>
+
+    administrator --- (manajemen objek pariwisata)
+    administrator --- (manajemen reservasi)
+    administrator --- (manajemen ulasan dan rating)
+
+    pengunjung --- (mengelola_akun) : <<include>>
+    administrator --- (mengelola_akun) : <<include>>
+
+    (manajemen objek pariwisata) --- pemilik_objek_wisata : <<extend>>
+    (manajemen reservasi) --- sistem_pembayaran : <<include>>
+    (manajemen reservasi) --- pemilik_objek_wisata : <<extend>>
+    (manajemen ulasan dan rating) --- (melihat detail objek wisata) : <<extend>>
+
+    (registrasi) --- (login) : <<include>>
+
+    (registrasi) --- (mengelola_akun) : <<extend>>
+
+    pengunjung --- (validasi_pengguna) : <<include>>
+
+}
+
+database database_desa {
+    (data objek wisata)
+    (data reservasi)
+    (data ulasan dan rating)
+    (data akun pengunjung)
+}
+
+pengunjung --|> database_desa : <<access>>
+administrator --|> database_desa : <<access>>
+pemilik_objek_wisata --|> database_desa : <<access>>
+sistem_pembayaran --|> database_desa : <<access>>
+
+@enduml
